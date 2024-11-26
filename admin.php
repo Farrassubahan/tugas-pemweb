@@ -1,9 +1,11 @@
-<?php 
+<?php
 session_start();
-// Memeriksa apakah peran session 'role' adalah 'user', dan menghancurkan session jika benar
-if ($_SESSION['role'] != 'user') {
-    header('Location: login.php'); // Redirect ke halaman login jika bukan user
-    exit;
+
+if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+    session_destroy();
+   
+    header("Location: login.php");
+    exit();  
 }
 ?>
 
@@ -12,7 +14,7 @@ if ($_SESSION['role'] != 'user') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard User</title>
+    <title>Dashboard Administrator</title>
     <!-- Link ke Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -57,13 +59,20 @@ if ($_SESSION['role'] != 'user') {
         .btn-primary:hover {
             background-color: #0056b3;
         }
+        .btn-success {
+            background-color: #28a745;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Selamat datang, <?php echo htmlspecialchars($_SESSION['name']); ?></h1>
+          <h1>Selamat datang, <?php echo htmlspecialchars($_SESSION['name']); ?></h1> ?></h1>
         <a href="show.php" class="btn btn-primary">Lihat Data</a>
+        <a href="create.php" class="btn btn-success">Tambah Data</a>
         <a href="./logout.php" class="btn btn-logout">Logout</a>
     </div>
 

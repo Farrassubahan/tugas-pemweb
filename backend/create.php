@@ -1,27 +1,30 @@
 <?php
-
 require './../config/db.php';
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
     global $db_connect;
 
     $name = $_POST['name'];
-    $price = $_POST['price'];
+    $price = $_POST['price']; 
     $image = $_FILES['image']['name'];
     $tempImage = $_FILES['image']['tmp_name'];
 
+    // Membuat nama file yang unik
     $randomFilename = time().'-'.md5(rand()).'-'.$image;
 
-    $uploadPath = $_SERVER['DOCUMENT_ROOT'].'/upload/'.$randomFilename;
+    // Path relatif untuk menyimpan file
+    $uploadPath = $_SERVER['DOCUMENT_ROOT'].'/pemweb teori/p7/upload/'.$randomFilename;  
 
-    $upload = move_uploaded_file($tempImage,$uploadPath);
+    // Memindahkan file dari tmp ke folder upload
+    $upload = move_uploaded_file($tempImage, $uploadPath);
 
-    if($upload) {
-        mysqli_query($db_connect,"INSERT INTO products (name,price,image)
-                    VALUES ('$name','$price','/upload/$randomFilename')");
-        echo "berhasil upload";
+    if ($upload) {
+        // Menyimpan data ke database
+        mysqli_query($db_connect, "INSERT INTO products (name, price, image)
+                    VALUES ('$name', '$price', '/pemweb teori/p7/upload/$randomFilename')");  
+        echo "Berhasil upload";
     } else {
-        echo "gagal upload";
+        echo "Gagal upload";
     }
-
 }
+?>

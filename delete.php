@@ -8,6 +8,6 @@ $id = $_GET['id'];
 mysqli_query($db_connect, "DELETE FROM products WHERE id = $id");
 
 // Redirect ke halaman data produk
-header("Location: index.php");
+header("Location: show.php");
 exit();
 ?>
