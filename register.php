@@ -6,10 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>login</h1>
-    <form action="./backend/login.php" method="post">
+    <h1>Register</h1>
+    <form action="./backend/register.php" method="post">
+        <input type="text" name="name" placeholder="masukkan nama anda">
         <input type="email" name="email" placeholder="masukkan email anda">
         <input type="password" name="password" placeholder="masukkan password anda">
+        <input type="password" name="confirm" placeholder="masukkan konfirmasi password anda">
         <input type="submit" value="login" name="submit">
     </form>
 
